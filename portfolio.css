@@ -358,7 +358,7 @@ footer {
 }
 @media only screen and (max-width:690px) {
     footer{
-        font-size: 5px;
+        font-size: 6px;
     }
 }
 .sns {
