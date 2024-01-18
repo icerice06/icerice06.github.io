@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatJCB</title>
+</head>
+
+<body>
+    <header>
+        <a href="main1.html" onclick="return loadHeader('main1.html')" class="Category-logo">
+            <img class="Category-logo-img" src="logo.jpg">
+            <div class="Category-logo-text">Category</div>
+            <div class="logo-text">ChatJCB</div>
+        </a>
+        <div class="Category">
+            <a href="main2.html" onclick="return loadHeader('main2.html')" class="Category-box">
+                <div class="Category-box-text">너는 어떤사람이야?</div>
+            </a>
+            <a href="main3.html" onclick="return loadHeader('main3.html')" class="Category-box">
+                <div class="Category-box-text">skills 을 뭘가지고 있어?</div>
+            </a>
+            <a href="main4.html" onclick="return loadHeader('main4.html')" class="Category-box">
+                <div class="Category-box-text">portfolio 보여줘!</div>
+            </a>
+            <a href="main5.html" onclick="return loadHeader('main5.html')" class="Category-box">
+                <div class="Category-box-text">연락처 좀 알려줘</div>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div id="content"></div>
+        <div class="search-box">
+            <div id="search-text" class="typing"></div>
+            <img src="button.svg" class="search-button">
+        </div>
+    </main>
+
+    <script>
+        var typingInterval;
+
+        function loadHeader(headerUrl) {
+            var contentDiv = document.getElementById("content");
+            var searchTextDiv = document.getElementById("search-text");
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    contentDiv.innerHTML = xhr.responseText;
+
+                    switch (headerUrl) {
+                        case 'main1.html':
+                            animateText("Category를 눌러 주세요!");
+                            break;
+                        case 'main2.html':
+                            animateText("너는 어떤사람이야?");
+                            break;
+                        case 'main3.html':
+                            animateText("안녕하세요3");
+                            break;
+                        case 'main4.html':
+                            animateText("portfolio 보여줘!");
+                            break;
+                        case 'main5.html':
+                            animateText("안녕하세요5");
+                            break;
+                        default:
+                            searchTextDiv.innerHTML = "";
+                    }
+                }
+            };
+            xhr.open("GET", headerUrl, true);
+            xhr.send();
+
+            return false;
+        }
+
+        function animateText(text) {
+            var searchTextDiv = document.getElementById("search-text");
+            searchTextDiv.innerHTML = "";
+
+            clearInterval(typingInterval);
+
+            var index = 0;
+            typingInterval = setInterval(function () {
+                searchTextDiv.innerHTML += text[index];
+                index++;
+                if (index === text.length) {
+                    clearInterval(typingInterval);
+                }
+            }, 100);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            loadHeader('main1.html');
+        });
+
+    </script>
+</body>
+
+</html>

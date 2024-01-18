@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body,
+html {
+    height: 100%;
+}
+
+body {
+    background: #343541;
+    display: flex;
+}
+
+header {
+    width: 325px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #000;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.Category-logo {
+    margin-top: 2%;
+    margin-left: 10%;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+}
+
+.Category-logo-img {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.Category-logo-text {
+    color: #cacacf;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    margin-left: 10px;
+    line-height: normal;
+}
+
+.logo-text {
+    color: #FFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-left: 50%;
+}
+
+.Category {
+    margin-top: 20px;
+    margin-left: 10px;
+}
+
+.Category-box {
+    width: 243px;
+    height: 48px;
+    display: flex;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: #000;
+}
+
+.Category-box:hover {
+    background: #202123;
+}
+
+.Category-box-text {
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.search-box {
+    width: 50%;
+    height: 8%;
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 2%;
+    border-radius: 20px;
+    border: 1.5px solid #5D5E6A;
+    background: rgba(217, 217, 217, 0.00);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#search-text {
+    margin-left: 10px;
+    color: #e1e1e1;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.search-button {
+    width: 7%;
+    height: 47px;
+    stroke-width: 3px;
+    margin-right: 10px;
+    stroke: #343541;
+}
