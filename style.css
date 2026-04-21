@@ -1,3 +1,13 @@
+:root {
+    --bg-main: #212121;
+    --bg-sidebar: #171717;
+    --bg-hover: #2f2f2f;
+    --bg-input: #2f2f2f;
+    --text-primary: #ececec;
+    --text-secondary: #9b9b9b;
+    --text-accent: #00d4ff;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -6,129 +16,233 @@
 
 a {
     text-decoration: none;
-}
-
-body,
-html {
-    height: 100%;
+    color: inherit;
 }
 
 body {
-    background: #343541;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     display: flex;
+    height: 100vh;
+    overflow: hidden;
 }
 
-header {
-    width: 325px;
-    height: 100%;
+/* --- 사이드바 --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-sidebar);
     display: flex;
     flex-direction: column;
-    background: #000;
+    padding: 1rem;
+    flex-shrink: 0;
 }
 
-main {
-    display: flex;
-    justify-content: center;
-}
-
-.Category-logo {
-    margin-top: 2%;
-    margin-left: 10%;
+.brand-logo {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 80px;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    margin-bottom: 24px;
 }
 
-.Category-logo-img {
-    width: 45px;
-    height: 45px;
-    flex-shrink: 0;
-    border-radius: 50%;
+.brand-logo:hover {
+    background-color: var(--bg-hover);
 }
 
-.Category-logo-text {
-    color: #cacacf;
-    font-family: Inter;
-    font-size: 25px;
-    font-style: normal;
-    font-weight: 500;
-    margin-left: 10px;
-    line-height: normal;
+.brand-img {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px; /* 요즘은 완전 원형보다 살짝 둥근 사각형이 트렌드 */
 }
 
-.logo-text {
-    color: #FFF;
-    text-align: center;
-    font-family: Inter;
-    font-size: 30px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin-left: 50%;
+.brand-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
 }
 
-.Category {
-    margin-top: 20px;
-    margin-left: 10px;
-}
-
-.Category-box {
-    width: 243px;
-    height: 48px;
+.nav-menu {
     display: flex;
-    flex-shrink: 0;
-    border-radius: 20px;
-    background: #000;
+    flex-direction: column;
+    gap: 4px;
 }
 
-.Category-box:hover {
-    background: #202123;
+.nav-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 12px 12px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
-.Category-box-text {
-    margin-left: 10px;
-    margin-top: 10px;
-    color: #FFF;
-    font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.nav-item {
+    font-size: 0.9rem;
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text-primary);
+    transition: background 0.2s;
 }
 
-main {
+.nav-item:hover {
+    background-color: var(--bg-hover);
+}
+
+/* --- 메인 챗 영역 --- */
+.chat-area {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 100%;
+}
+
+.chat-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 40px 20px 140px; /* 하단 입력창을 위해 아래 여백을 넉넉히 줌 */
+    transition: opacity 0.3s ease;
+}
+
+/* --- 메시지 UI --- */
+.message-wrapper {
+    max-width: 48rem;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    animation: fadeUp 0.4s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.chat-bubble {
+    flex-grow: 1;
+    line-height: 1.7;
+    font-size: 1rem;
+    color: #d1d5db;
+}
+
+.chat-bubble strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+.chat-bubble table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: transparent;
+}
+
+.chat-bubble th, .chat-bubble td {
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid #4b4c52;
+}
+
+.chat-bubble th {
+    background: #2f2f2f;
+    color: #fff;
+}
+
+.chat-bubble embed {
+    border-radius: 8px;
+    width: 100%;
+    height: 600px;
+    margin-top: 16px;
+    border: 1px solid #4b4c52;
+}
+
+/* --- 하단 입력창 영역 --- */
+.input-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0 20px 20px;
+    background: linear-gradient(180deg, transparent, var(--bg-main) 30%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .search-box {
-    width: 50%;
-    height: 8%;
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 2%;
-    border-radius: 20px;
-    border: 1.5px solid #5D5E6A;
-    background: rgba(217, 217, 217, 0.00);
+    width: 100%;
+    max-width: 48rem;
+    background-color: var(--bg-input);
+    border-radius: 16px;
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
-#search-text {
-    margin-left: 10px;
-    color: #e1e1e1;
-    font-family: Inter;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+.typing-text {
+    font-size: 1rem;
+    color: var(--text-primary);
 }
+
+.typing-cursor {
+    display: inline-block;
+    width: 6px;
+    height: 18px;
+    background-color: var(--text-primary);
+    margin-left: 4px;
+    vertical-align: middle;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
 
 .search-button {
-    width: 7%;
-    height: 47px;
-    stroke-width: 3px;
-    margin-right: 10px;
-    stroke: #343541;
+    background: var(--text-primary);
+    border: none;
+    border-radius: 8px;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.search-button:hover {
+    opacity: 0.8;
+}
+
+.search-button img {
+    width: 16px;
+    filter: invert(1); /* 검은색 svg를 흰색 버튼 안에서 보이게 반전 (svg 색상에 따라 조절) */
+}
+
+.footer-text {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 12px;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+    body { flex-direction: column; }
+    .sidebar { width: 100%; flex-direction: row; align-items: center; justify-content: space-between; padding: 10px 20px; }
+    .nav-menu { display: none; /* 모바일에서는 메뉴를 숨기거나 햄버거 메뉴로 대체하는 것이 깔끔함 */ }
+    .brand-logo { margin-bottom: 0; }
+    .message-wrapper { padding: 0 10px; flex-direction: column; gap: 10px; }
+    .chat-avatar { display: none; } /* 모바일에서는 프사 생략하여 공간 확보 */
 }

@@ -1,104 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatJCB</title>
+    <title>ChatJCB Portfolio</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header>
-        <a href="main1.html" onclick="return loadHeader('main1.html')" class="Category-logo">
-            <img class="Category-logo-img" src="logo.jpg">
-            <div class="Category-logo-text">Category</div>
-            <div class="logo-text">ChatJCB</div>
+    <aside class="sidebar">
+        <a href="main1.html" onclick="return loadHeader('main1.html')" class="brand-logo">
+            <img src="logo.jpg" class="brand-img" alt="Logo">
+            <span class="brand-text">ChatJCB</span>
         </a>
-        <div class="Category">
-            <a href="main2.html" onclick="return loadHeader('main2.html')" class="Category-box">
-                <div class="Category-box-text">너는 어떤사람이야?</div>
-            </a>
-            <a href="main3.html" onclick="return loadHeader('main3.html')" class="Category-box">
-                <div class="Category-box-text">skills 을 뭘가지고 있어?</div>
-            </a>
-            <a href="main4.html" onclick="return loadHeader('main4.html')" class="Category-box">
-                <div class="Category-box-text">portfolio 보여줘!</div>
-            </a>
-            <a href="main5.html" onclick="return loadHeader('main5.html')" class="Category-box">
-                <div class="Category-box-text">연락처 좀 알려줘</div>
-            </a>
-        </div>
-    </header>
+        <nav class="nav-menu">
+            <div class="nav-category">Category</div>
+            <a href="main2.html" onclick="return loadHeader('main2.html')" class="nav-item">너는 어떤 사람이야?</a>
+            <a href="main3.html" onclick="return loadHeader('main3.html')" class="nav-item">Skills는 뭘 가지고 있어?</a>
+            <a href="main4.html" onclick="return loadHeader('main4.html')" class="nav-item">Portfolio 보여줘!</a>
+            <a href="main5.html" onclick="return loadHeader('main5.html')" class="nav-item">연락처 좀 알려줘</a>
+            <a href="main6.html" onclick="return loadHeader('main6.html')" class="nav-item">어떻게 성장해왔어?</a>
+            <a href="main7.html" onclick="return loadHeader('main7.html')" class="nav-item">너의 일하는 방식은?</a>
+        </nav>
+    </aside>
 
-    <main>
-        <div id="content"></div>
-        <div class="search-box">
-            <div id="search-text" class="typing"></div>
-            <img src="button.svg" class="search-button">
+    <main class="chat-area">
+        <div id="content" class="chat-content">
+            </div>
+        
+        <div class="input-container">
+            <div class="search-box">
+                <div id="search-text" class="typing-text">Category를 눌러 주세요!</div>
+                <button class="search-button">
+                    <img src="button.svg" alt="Send">
+                </button>
+            </div>
+            <div class="footer-text">ChatJCB는 실제 AI가 아닌 정찬빈의 포트폴리오 웹사이트입니다.</div>
         </div>
     </main>
 
     <script>
-        var typingInterval;
+        let typingInterval;
+        let contentTypingInterval;
 
         function loadHeader(headerUrl) {
-            var contentDiv = document.getElementById("content");
-            var searchTextDiv = document.getElementById("search-text");
+            const contentDiv = document.getElementById("content");
+            clearInterval(contentTypingInterval);
 
-            var xhr = new XMLHttpRequest();
+            const xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    contentDiv.innerHTML = xhr.responseText;
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    contentDiv.scrollTo(0, 0);
 
+                    let text = "";
                     switch (headerUrl) {
-                        case 'main1.html':
-                            animateText("Category를 눌러 주세요!");
-                            break;
-                        case 'main2.html':
-                            animateText("너는 어떤사람이야?");
-                            break;
-                        case 'main3.html':
-                            animateText("안녕하세요3");
-                            break;
-                        case 'main4.html':
-                            animateText("portfolio 보여줘!");
-                            break;
-                        case 'main5.html':
-                            animateText("안녕하세요5");
-                            break;
-                        default:
-                            searchTextDiv.innerHTML = "";
+                        case 'main1.html': text = "Category를 눌러 주세요!"; break;
+                        case 'main2.html': text = "너는 어떤 사람이야?"; break;
+                        case 'main3.html': text = "Skills는 뭘 가지고 있어?"; break;
+                        case 'main4.html': text = "Portfolio 보여줘!"; break;
+                        case 'main5.html': text = "연락처 좀 알려줘"; break;
+                        case 'main6.html': text = "어떻게 성장해왔어?"; break;
+                        case 'main7.html': text = "너의 일하는 방식은?"; break;
                     }
+                    animateText(text);
+                    animateContentHTML(xhr.responseText, contentDiv);
                 }
             };
             xhr.open("GET", headerUrl, true);
             xhr.send();
-
             return false;
         }
 
         function animateText(text) {
-            var searchTextDiv = document.getElementById("search-text");
-            searchTextDiv.innerHTML = "";
-
+            const searchTextDiv = document.getElementById("search-text");
             clearInterval(typingInterval);
+            let index = 0;
+            searchTextDiv.innerHTML = '<span class="typing-cursor"></span>';
 
-            var index = 0;
-            typingInterval = setInterval(function () {
-                searchTextDiv.innerHTML += text[index];
+            typingInterval = setInterval(() => {
+                searchTextDiv.innerHTML = text.substring(0, index + 1) + '<span class="typing-cursor"></span>';
                 index++;
-                if (index === text.length) {
-                    clearInterval(typingInterval);
-                }
-            }, 100);
+                if (index >= text.length) clearInterval(typingInterval);
+            }, 50);
         }
 
-        document.addEventListener('DOMContentLoaded', function () {
-            loadHeader('main1.html');
-        });
+        function animateContentHTML(htmlContent, targetDiv) {
+            clearInterval(contentTypingInterval);
 
+            // 1. HTML을 임시 div에 파싱
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = htmlContent;
+
+            // 2. background가 있으면서 텍스트를 포함하는 요소만 숨김
+            //    (순수 장식용 dot 등 텍스트 없는 요소는 제외)
+            const bgElements = tempDiv.querySelectorAll('[style*="background"]');
+            bgElements.forEach(el => {
+                if (el.innerText && el.innerText.trim().length > 0) {
+                    el.style.opacity = '0';
+                    el.style.transition = 'opacity 0.25s ease';
+                    el.dataset.willReveal = 'true';
+                }
+            });
+
+            // 3. 모든 텍스트 노드 수집 후 내용 비우기
+            const textNodes = [];
+            function collectTextNodes(node) {
+                node.childNodes.forEach(child => {
+                    if (child.nodeType === Node.TEXT_NODE) {
+                        const full = child.textContent;
+                        if (full.trim().length > 0) {
+                            textNodes.push({ node: child, full: full });
+                            child.textContent = '';
+                        }
+                    } else {
+                        collectTextNodes(child);
+                    }
+                });
+            }
+            collectTextNodes(tempDiv);
+
+            // 4. DOM 구조를 한 번에 삽입 (이후 innerHTML 교체 없음 → 깜빡임 없음)
+            targetDiv.innerHTML = '';
+            targetDiv.style.opacity = '1';
+            while (tempDiv.firstChild) {
+                targetDiv.appendChild(tempDiv.firstChild);
+            }
+
+            // 5. 각 텍스트 노드의 타이핑 시작 시 숨겨진 조상 요소를 순차적으로 fade-in
+            const revealed = new WeakSet();
+
+            function revealAncestors(node) {
+                let ancestor = node.parentElement;
+                while (ancestor && ancestor !== targetDiv) {
+                    if (ancestor.dataset && ancestor.dataset.willReveal === 'true' && !revealed.has(ancestor)) {
+                        ancestor.style.opacity = '1';
+                        revealed.add(ancestor);
+                    }
+                    ancestor = ancestor.parentElement;
+                }
+            }
+
+            let nodeIndex = 0;
+            let charIndex = 0;
+
+            contentTypingInterval = setInterval(() => {
+                if (nodeIndex >= textNodes.length) {
+                    clearInterval(contentTypingInterval);
+                    return;
+                }
+
+                const current = textNodes[nodeIndex];
+
+                // 텍스트 노드의 첫 글자 시점에 해당 박스 reveal
+                if (charIndex === 0) {
+                    revealAncestors(current.node);
+                }
+
+                charIndex++;
+                current.node.textContent = current.full.substring(0, charIndex);
+
+                if (charIndex >= current.full.length) {
+                    nodeIndex++;
+                    charIndex = 0;
+                }
+            }, 8);
+        }
+
+        // 초기 로드
+        document.addEventListener('DOMContentLoaded', () => loadHeader('main1.html'));
     </script>
 </body>
-
 </html>

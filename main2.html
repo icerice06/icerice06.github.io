@@ -1,100 +1,19 @@
-<style>
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(-20%);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .Information {
-        margin-top: 20%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 726px;
-        height: 50%;
-        flex-shrink: 0;
-        opacity: 0;
-        animation: fadeIn 1s ease-out forwards;
-    }
-
-    .Information-header {
-        display: flex;
-        align-items: center;
-        width: 666px;
-        margin-bottom: 10px;
-    }
-
-    .Information-img {
-        width: 45px;
-        height: 45px;
-        flex-shrink: 0;
-        border-radius: 50px;
-    }
-
-    .Information-text {
-        color: #FFF;
-        text-align: center;
-        font-family: Inter;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        margin-left: 10px;
-    }
-
-    .Information-box-head {
-        width: 666px;
-        height: 10%;
-        flex-shrink: 0;
-        padding-left: 15px;
-        color: #FFF;
-        border-radius: 10px 10px 0px 0px;
-        background: #202123;
-        display: flex; /* Add this line to make it horizontal */
-        align-items: center; /* Center the text vertically */
-    }
-
-    .Information-box-main {
-        width: 666px;
-        height: 80%;
-        flex-shrink: 0;
-        border-radius: 0px 0px 10px 10px;
-        background: #000;
-        color: #FFF;
-        padding: 10px;
-        font-family: Inter;
-        overflow-y: auto;
-        font-size: 18px;
-    }
-</style>
-
-<div class="Information">
-    <div class="Information-header">
-        <img src="logo.jpg" class="Information-img">
-        <div class="Information-text">ChatJCB</div>
-    </div>
-    <div class="Information-box-head">자기소개</div>
-    <div class="Information-box-main">
-        <pre>
-{
-    "이름": "정찬빈",
-    "성별": "남",
-    "생년": "2006-04-06",
-    "취미": ["음악 감상", "여행", "친구 만나기"],
-    "교육": {
-        "학교": {
-            "초등학교": "유영초등학교",
-            "중학교": "통영중학교",
-            "고등학교": "경북소프트웨어고등학교"
-        }
-    },
-    "관심 분야": ["인프라", "인공지능", "웹"],
-    "자기소개": "안녕하세요 정찬빈이라고 합니다."
-}        </pre>   
+<div class="message-wrapper">
+    <img src="logo.jpg" class="chat-avatar">
+    <div class="chat-bubble">
+        <h3 style="margin-bottom: 15px; color: #fff;">👤 저는 이런 사람입니다</h3>
+        <p><strong>"실전에서 배운 끈기 있는 엔지니어"</strong></p>
+        <p style="margin-top:10px;">고교 시절 인공지능을 전공하고, 졸업과 동시에 실무에 투입되어 서버 관리와 시스템 구축을 경험했습니다. 실패를 두려워하지 않고 원인을 분석하며 끝까지 해결해내는 과정에서 큰 보람을 느낍니다.</p>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px;">
+            <div style="background: #2f2f2f; padding: 15px; border-radius: 12px;">
+                <span style="font-size: 0.8rem; color: #9b9b9b;">Education</span><br>
+                <strong>경북소프트웨어고</strong>
+            </div>
+            <div style="background: #2f2f2f; padding: 15px; border-radius: 12px;">
+                <span style="font-size: 0.8rem; color: #9b9b9b;">Current Role</span><br>
+                <strong>피플데이타 ITSM 팀</strong>
+            </div>
+        </div>
     </div>
 </div>
